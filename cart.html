@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Your Cart | Studiova</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <style> body { padding-top: 80px; } .cart-img{ width:80px; height:80px; object-fit:cover; background:#fff; } </style>
+</head>
+<body>
+  
+<header class="header border-4 border-primary border-top position-fixed start-0 top-0 w-100 bg-white">
+  <div class="container">
+    <div class="header-wrapper d-flex align-items-center justify-content-between py-3">
+      <div class="logo">
+        <a href="index.html" class="logo-dark">
+          <img src="assets/images/logos/logo-dark.svg" alt="Studiova logo" class="img-fluid" style="height:36px">
+        </a>
+      </div>
+      <nav class="d-flex align-items-center gap-4">
+        <a href="index.html" class="text-dark">Home</a>
+        <a href="shop.html" class="text-dark fw-bold">Shop</a>
+        <a href="cart.html" class="btn btn-dark text-white">Cart (<span data-cart-count>0</span>)</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+  <main class="py-5">
+    <div class="container">
+      <div class="row g-5">
+        <div class="col-lg-8">
+          <h1 class="h3 mb-4">Shopping Cart</h1>
+          <div class="table-responsive">
+            <table class="table align-middle">
+              <thead>
+                <tr><th>Product</th><th>Price</th><th style="width:140px;">Qty</th><th>Total</th><th></th></tr>
+              </thead>
+              <tbody id="cart-body"></tbody>
+            </table>
+          </div>
+          <button id="clearCart" class="btn btn-outline-danger">Clear Cart</button>
+        </div>
+        <div class="col-lg-4">
+          <div class="card shadow-sm">
+            <div class="card-body">
+              <h2 class="h5">Order Summary</h2>
+              <div class="d-flex justify-content-between mt-3">
+                <span>Subtotal</span><span id="subtotal">$0.00</span>
+              </div>
+              <div class="d-flex justify-content-between">
+                <span>Delivery</span><span>Free</span>
+              </div>
+              <hr>
+              <div class="d-flex justify-content-between fw-bold">
+                <span>Total</span><span id="grandtotal">$0.00</span>
+              </div>
+            </div>
+          </div>
+          <div class="card shadow-sm mt-4">
+            <div class="card-body">
+              <h2 class="h5 mb-3">Checkout</h2>
+              <form id="checkoutForm" class="vstack gap-2">
+                <input class="form-control" placeholder="Full Name" required>
+                <input type="email" class="form-control" placeholder="Email Address" required>
+                <input class="form-control" placeholder="Phone Number">
+                <input class="form-control" placeholder="Street Address" required>
+                <div class="hstack gap-2">
+                  <input class="form-control" placeholder="City" required>
+                  <input class="form-control" placeholder="Zip" required>
+                </div>
+                <select class="form-select">
+                  <option>United States</option><option>United Kingdom</option><option>Canada</option><option>Nigeria</option><option>Ghana</option>
+                </select>
+                <select class="form-select">
+                  <option>Credit / Debit Card</option><option>PayPal</option><option>Cash on Delivery</option>
+                </select>
+                <button class="btn btn-dark mt-2" type="submit">Place Order</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="assets/js/cart.js"></script>
+  <script>
+    const bodyEl = document.getElementById('cart-body');
+    function renderCart() {
+      const cart = StudiovaCart.getCart();
+      if (!cart.length) {
+        bodyEl.innerHTML = '<tr><td colspan="5" class="text-center py-5">Your cart is empty. <a href="shop.html">Go shopping</a></td></tr>';
+        document.getElementById('subtotal').textContent = '$0.00';
+        document.getElementById('grandtotal').textContent = '$0.00';
+        return;
+      }
+      let rows = '';
+      let subtotal = 0;
+      cart.forEach(item => {
+        const p = StudiovaCart.getProductById(item.id);
+        const line = p.price * item.qty;
+        subtotal += line;
+        rows += `
+          <tr>
+            <td>
+              <div class="d-flex align-items-center gap-3">
+                <img src="${p.image}" class="cart-img rounded shadow-sm" alt="${p.name}">
+                <div>
+                  <div class="fw-bold">${p.name}</div>
+                  <small class="text-muted">${p.category}</small>
+                </div>
+              </div>
+            </td>
+            <td>$${p.price.toFixed(2)}</td>
+            <td>
+              <div class="input-group input-group-sm" style="max-width:140px">
+                <button class="btn btn-outline-secondary" onclick="changeQty('${p.id}', -1)">-</button>
+                <input id="qty-${p.id}" class="form-control text-center" value="${item.qty}" oninput="setQtyFromInput('${p.id}', this.value)">
+                <button class="btn btn-outline-secondary" onclick="changeQty('${p.id}', 1)">+</button>
+              </div>
+            </td>
+            <td>$${line.toFixed(2)}</td>
+            <td><button class="btn btn-sm btn-outline-danger" onclick="removeItem('${p.id}')">Remove</button></td>
+          </tr>`;
+      });
+      bodyEl.innerHTML = rows;
+      document.getElementById('subtotal').textContent = '$' + subtotal.toFixed(2);
+      document.getElementById('grandtotal').textContent = '$' + subtotal.toFixed(2);
+    }
+    function changeQty(id, delta) {
+      const cart = StudiovaCart.getCart();
+      const item = cart.find(x=>x.id===id);
+      if (!item) return;
+      item.qty = Math.max(1, item.qty + delta);
+      StudiovaCart.saveCart(cart);
+      renderCart();
+    }
+    function setQtyFromInput(id, val) {
+      const num = Math.max(1, parseInt(val) || 1);
+      StudiovaCart.setQty(id, num);
+      renderCart();
+    }
+    function removeItem(id) { StudiovaCart.removeFromCart(id); renderCart(); }
+    document.getElementById('clearCart').addEventListener('click', () => { StudiovaCart.clearCart(); renderCart(); });
+
+    document.getElementById('checkoutForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert('Order placed! (Demo)');
+      StudiovaCart.clearCart();
+      renderCart();
+    });
+
+    document.addEventListener('DOMContentLoaded', renderCart);
+  </script>
+</body>
+</html>

@@ -1,0 +1,396 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Studiova</title>
+  <link rel="shortcut icon" type="image/png" href="../assets/images/logos/favicon.svg" />
+  <link rel="stylesheet" href="../assets/libs/owl.carousel/dist/assets/owl.carousel.min.css">
+  <link rel="stylesheet" href="../assets/libs/aos-master/dist/aos.css">
+  <link rel="stylesheet" href="../assets/css/styles.css" />
+  <style>
+    /* body { padding-top: 80px; } */
+    .product-card img { width:100%; height:260px; object-fit:cover; background:#fff; }
+
+    .btn-group .btn {
+  border-radius: 0 !important;   /* square corners */
+  padding: 0.35rem 0.65rem;       /* compact */
+  font-size: 0.85rem;             /* smaller text */
+}
+
+/* View button */
+.btn-group .btn-outline-dark {
+  flex: 1;  /* takes less space */
+}
+
+/* Add button */
+.btn-group .btn-dark {
+  flex: 1.4;   /* takes more space (wider than View) */
+  font-weight: 600;
+  background-color: #111 !important;  
+  border-color: #111 !important;
+}
+
+.btn-group .btn-dark:hover {
+  background-color: #fff !important;
+}
+
+
+/* Custom toggle button */
+.toggle-menu-btn {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;          /* perfect circle */
+  background-color: #fff;      /* white background */
+  border: 2px solid #fff;      /* subtle border */
+  display: flex;               /* keep icon centered */
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.toggle-menu-btn:hover {
+  background-color: #f5f5f5;   /* light gray hover */
+  border-color: #fff;
+}
+
+.toggle-menu-btn:focus,
+.toggle-menu-btn[aria-expanded="true"] {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0,123,255,0.25); /* subtle focus ring */
+}
+
+
+/* Cart button custom style */
+.cart-btn {
+  padding: 0.50rem 0.6rem;   /* smaller height & width */
+  font-size: 0.85rem;        /* reduce text size */
+  border-radius: 6px;        /* slightly rounded */
+  line-height: 1.2;          /* tighter vertical alignment */
+}
+
+.cart-btn:hover {
+  background-color: orange;    /* darker hover */
+  border-color: #111;
+}
+
+  </style>
+</head>
+
+<body>
+
+  <!-- Header -->
+  <header class="header border-4 border-primary border-top position-fixed start-0 top-0 w-100">
+    <div class="container">
+      <div class="header-wrapper d-flex align-items-center justify-content-between">
+        <div class="logo">
+          <a href="index.html" class="logo-white">
+            <img src="../assets/images/logos/logo-white.svg" alt="logo" class="img-fluid">
+          </a>
+          <a href="index.html" class="logo-dark">
+            <img src="../assets/images/logos/logo-dark.svg" alt="logo" class="img-fluid">
+          </a>
+        </div>
+        <!-- <div class="d-flex align-items-center gap-4"> -->
+            <!-- <nav class="d-flex align-items-center gap-4">
+        <a href="index.html" class="text-white">Home</a>
+        <a href="shop.html" class="text-white fw-bold">Shop</a>
+        <a href="cart.html" class="btn btn-dark text-white">Cart (<span data-cart-count>0</span>)</a>
+      </nav> -->
+
+          <div class="btn-group">
+          <button 
+  class="toggle-menu-btn d-flex align-items-center justify-content-center"
+  type="button" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false">
+  <iconify-icon icon="solar:hamburger-menu-line-duotone" class="menu-icon fs-8 text-dark"></iconify-icon>
+</button>
+
+
+            <ul class="dropdown-menu dropdown-menu-end p-4">
+              <div class="d-flex flex-column gap-6">
+                <div class="hstack justify-content-between border-bottom pb-6">
+                  <p class="mb-0 fs-5 text-dark">Menu</p>
+                  <button type="button" class="btn-close opacity-75" aria-label="Close"></button>
+                </div>
+                <div class="d-flex flex-column gap-3">
+                  <ul class="header-menu list-unstyled mb-0 d-flex flex-column gap-2">
+                    <li class="header-item">
+                      <a href="index.html" class="header-link hstack gap-2 fs-7 fw-bold text-dark"><img
+                          src="../assets/images/svgs/secondary-leaf.svg" alt="" width="20" height="20"
+                          class="img-fluid animate-spin">Home</a>
+                    </li>
+                    <li class="header-item">
+                      <a href="about-us.html" class="header-link hstack gap-2 fs-7 fw-bold text-dark"><img
+                          src="../assets/images/svgs/secondary-leaf.svg" alt="" width="20" height="20"
+                          class="img-fluid animate-spin">About</a>
+                    </li>
+                    <li class="header-item">
+                      <a href="projects.html" class="header-link hstack gap-2 fs-7 fw-bold text-dark"><img
+                          src="../assets/images/svgs/secondary-leaf.svg" alt="" width="20" height="20"
+                          class="img-fluid animate-spin">Projects</a>
+                    </li>
+                    <li class="header-item">
+                      <a href="blog.html" class="header-link hstack gap-2 fs-7 fw-bold text-dark"><img
+                          src="../assets/images/svgs/secondary-leaf.svg" alt="" width="20" height="20"
+                          class="img-fluid animate-spin">Blog</a>
+                    </li>
+                    <li class="header-item">
+                      <a href="index.html" class="header-link hstack gap-2 fs-7 fw-bold text-dark"><img
+                          src="../assets/images/svgs/secondary-leaf.svg" alt="" width="20" height="20"
+                          class="img-fluid animate-spin">Services</a>
+                    </li>
+                    <li class="header-item">
+                      <a href="contact.html" aria-current="true"
+                        class="header-link active hstack gap-2 fs-7 fw-bold text-dark"><img
+                          src="../assets/images/svgs/secondary-leaf.svg" alt="" width="20" height="20"
+                          class="img-fluid animate-spin">Contact</a>
+                    </li>
+                    <li class="header-item">
+                      <a href="index.html" class="header-link hstack gap-2 fs-7 fw-bold text-dark"><img
+                          src="../assets/images/svgs/secondary-leaf.svg" alt="" width="20" height="20"
+                          class="img-fluid animate-spin">Docs</a>
+                    </li>
+                  </ul>
+                  <div class="hstack gap-3">
+                    <a href="sign-in.html"
+                      class="btn btn-outline-light fs-6 bg-white px-3 py-2 text-dark w-50 hstack justify-content-center">Sign
+                      In</a>
+                    <a href="sign-up.html"
+                      class="btn btn-dark text-white fs-6 bg-dark px-3 py-2 w-50 hstack justify-content-center">Sign
+                      Up</a>
+                  </div>
+                </div>
+                <div>
+                  <a class="text-dark" href="tel:+1-212-456-7890">+1-212-456-7890</a>
+                  <a class="fs-8 text-dark fw-bold" href="mailto:info@wrappixel.com">info@wrappixel.com</a>
+                </div>
+              </div>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!--  Page Wrapper -->
+  <div class="page-wrapper overflow-hidden">
+
+    <!--  Banner Section -->
+    <section class="banner-section banner-inner-section position-relative overflow-hidden d-flex align-items-end"
+      style="background-image: url(../assets/images/backgrounds/contact-banner.jpg);">
+      <div class="container">
+        <div class="d-flex flex-column gap-4 pb-5 pb-xl-10 position-relative z-1">
+          <div class="row align-items-center">
+            <div class="col-xl-4">
+              <div class="d-flex align-items-center gap-4" data-aos="fade-up" data-aos-delay="100"
+                data-aos-duration="1000">
+                <img src="../assets/images/svgs/primary-leaf.svg" alt="" class="img-fluid animate-spin">
+                <p class="mb-0 text-white fs-5 text-opacity-70">Ready to <span class="text-primary">start
+                    something</span> great? Reach out we’d love to hear from you.</p>
+              </div>
+            </div>
+          </div>
+          <div class="d-flex align-items-end gap-3" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
+            <h1 class="mb-0 fs-16 text-white lh-1">Shop</h1>
+            <a href="javascript:void(0)" class="p-1 ps-7 bg-primary rounded-pill">
+              <span class="bg-white round-52 rounded-circle d-flex align-items-center justify-content-center">
+                <iconify-icon icon="lucide:arrow-up-right" class="fs-8 text-dark"></iconify-icon>
+              </span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- !!!!!!!!!!!!!!!!!! -->
+
+      
+
+     <main class="py-5">
+    <div class="container">
+      <div class="d-flex justify-content-between align-items-center mb-4">
+<nav class="d-flex align-items-center gap-4">
+        <a href="index.html" class="text-dark">Home</a>
+        <a href="shop.html" class="text-dark fw-bold">Shop</a>
+<a href="cart.html" class="btn btn-dark text-white cart-btn">Cart(<span data-cart-count>0</span>)</a>
+      </nav>  
+
+         <!-- <input id="search" class="form-control w-auto" placeholder="Search products" > -->
+      </div>
+      <div id="product-grid" class="row g-4"></div>
+    </div>
+  </main>
+
+
+  <main class="py-5">
+    <div class="container">
+      <div id="content" class="row g-5 align-items-start"></div>
+    </div>
+  </main>
+
+
+
+   <footer class="footer bg-dark py-5 py-lg-11 py-xl-12">
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-5 mb-8 mb-xl-0">
+          <div class="d-flex flex-column gap-8 pe-xl-5">
+            <h2 class="mb-0 text-white">Build something together?</h2>
+            <div class="d-flex flex-column gap-2">
+              <a href="https://www.wrappixel.com/" target="_blank" class="link-hover hstack gap-3 text-white fs-5">
+                <iconify-icon icon="lucide:arrow-up-right" class="fs-7 text-primary"></iconify-icon>
+                info@wrappixel.com
+              </a>
+              <a href="https://maps.app.goo.gl/hpDp81fqzGt5y4bC8" target="_blank"
+                class="link-hover hstack gap-3 text-white fs-5">
+                <iconify-icon icon="lucide:map-pin" class="fs-7 text-primary"></iconify-icon>
+                info@wrappixel.com
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 col-xl-2 mb-8 mb-xl-0">
+          <ul class="footer-menu list-unstyled mb-0 d-flex flex-column gap-2">
+            <li><a class="link-hover fs-5 text-white" href="index.html">Home</a></li>
+            <li><a class="link-hover fs-5 text-white" href="about-us.html">About</a></li>
+            <li><a class="link-hover fs-5 text-white" id="services" href="#services">Services</a></li>
+            <li><a class="link-hover fs-5 text-white" href="projects.html">Work</a></li>
+            <li><a class="link-hover fs-5 text-white" href="terms-and-conditions.html">Terms</a></li>
+            <li><a class="link-hover fs-5 text-white" href="privacy-policy.html">Privacy Policy</a></li>
+            <li><a class="link-hover fs-5 text-white" href="404.html">Error 404</a></li>
+          </ul>
+        </div>
+        <div class="col-md-4 col-xl-2 mb-8 mb-xl-0">
+          <ul class="footer-menu list-unstyled mb-0 d-flex flex-column gap-2">
+            <li><a class="link-hover fs-5 text-white" href="#!">Facebook</a></li>
+            <li><a class="link-hover fs-5 text-white" href="#!">Instagram</a></li>
+            <li><a class="link-hover fs-5 text-white" href="#!">Twitter</a></li>
+          </ul>
+        </div>
+        <div class="col-md-4 col-xl-3 mb-8 mb-xl-0">
+          <p class="mb-0 text-white text-opacity-70 text-md-end">© Studiova copyright 2025</p>
+        </div>
+      </div>
+    </div>
+  <p class="mb-0 text-white text-opacity-70 text-md-center mt-10">Distributed by <a class="text-white" href="https://www.themewagon.com" target="_blank">ThemeWagon</a></p>
+  </footer>
+
+  <div class="get-template hstack gap-2">
+    
+    <button class="btn bg-primary p-2 round-52 rounded-circle hstack justify-content-center flex-shrink-0"
+      id="scrollToTopBtn">
+      <iconify-icon icon="lucide:arrow-up" class="fs-7 text-dark"></iconify-icon>
+    </button>
+  </div>
+
+
+  <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
+  <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/libs/owl.carousel/dist/owl.carousel.min.js"></script>
+  <script src="../assets/libs/aos-master/dist/aos.js"></script>
+  <script src="../assets/js/custom.js"></script>
+  <!-- solar icons -->
+  <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
+  <script src="assets/js/cart.js"></script>
+  <script src="assets/js/cart.js"></script>
+<script>
+  const grid = document.getElementById('product-grid');
+  const products = window.STUDIOVA_PRODUCTS;
+  const perPage = 12;
+  let currentPage = 1;
+  let filtered = [...products];
+
+  function card(p) {
+    return `
+    <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
+      <div class="card shadow-sm product-card h-100">
+        <img src="${p.image}" alt="${p.name}" class="card-img-top">
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title">${p.name}</h5>
+          <p class="text-muted mb-2">${p.category}</p>
+          <div class="mt-auto d-flex align-items-center justify-content-between">
+            <span class="fw-bold">$${p.price.toFixed(2)}</span>
+            <div class="btn-group">
+              <a href="product-details.html?id=${p.id}" class="btn btn-outline-dark btn-sm">View</a>
+              <button class="btn btn-dark btn-sm" onclick="StudiovaCart.addToCart('${p.id}',1)">Add</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>`;
+  }
+
+  function renderPage(page) {
+    currentPage = page;
+    const start = (page - 1) * perPage;
+    const end = start + perPage;
+    const list = filtered.slice(start, end);
+
+    grid.innerHTML = list.map(card).join('') + pagination();
+  }
+
+  function pagination() {
+    const totalPages = Math.ceil(filtered.length / perPage);
+    if (totalPages <= 1) return '';
+
+    let html = `<div class="col-12"><nav><ul class="pagination justify-content-center mt-4">`;
+    html += `<li class="page-item ${currentPage === 1 ? 'disabled' : ''}">
+              <a class="page-link" href="#" onclick="renderPage(${currentPage - 1});return false;">Previous</a>
+            </li>`;
+
+    for (let i = 1; i <= totalPages; i++) {
+      html += `<li class="page-item ${i === currentPage ? 'active' : ''}">
+                 <a class="page-link" href="#" onclick="renderPage(${i});return false;">${i}</a>
+               </li>`;
+    }
+
+    html += `<li class="page-item ${currentPage === totalPages ? 'disabled' : ''}">
+              <a class="page-link" href="#" onclick="renderPage(${currentPage + 1});return false;">Next</a>
+            </li>`;
+    html += `</ul></nav></div>`;
+    return html;
+  }
+
+  // Search
+  document.getElementById('search').addEventListener('input', (e)=>{
+    const q = e.target.value.toLowerCase();
+    filtered = products.filter(p => 
+      p.name.toLowerCase().includes(q) || 
+      p.category.toLowerCase().includes(q)
+    );
+    renderPage(1);
+  });
+
+  // Init
+  renderPage(1);
+</script>
+
+
+
+  <script src="assets/js/cart.js"></script>
+  <script>
+    const params = new URLSearchParams(location.search);
+    const id = params.get('id');
+    const p = window.STUDIOVA_PRODUCTS.find(x => x.id === id) || window.STUDIOVA_PRODUCTS[0];
+    const el = document.getElementById('content');
+    el.innerHTML = `
+      <div class="col-lg-6">
+        <img class="pd-img rounded shadow" src="${p.image}" alt="${p.name}">
+      </div>
+      <div class="col-lg-6">
+        <h1 class="h3">${p.name}</h1>
+        <p class="text-muted">${p.category}</p>
+        <p>${p.description}</p>
+        <div class="d-flex align-items-center gap-3 my-3">
+          <span class="display-6 fw-bold">$${p.price.toFixed(2)}</span>
+        </div>
+        <div class="d-flex gap-2">
+          <button class="btn btn-dark px-4" onclick="StudiovaCart.addToCart('${p.id}',1)">Add to Cart</button>
+          <a class="btn btn-outline-dark px-4" href="cart.html">Go to Cart</a>
+        </div>
+      </div>`;
+  </script>
+</body>
+</html>

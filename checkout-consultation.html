@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Consultation Checkout | Studiova</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background: #f8f9fb;
+    margin: 0;
+    padding: 0;
+    color: #333;
+  }
+
+  main.container {
+    max-width: 700px;
+    margin: 50px auto;
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+  }
+
+  h1 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    color: #222;
+  }
+
+  p.small {
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 20px;
+  }
+
+  form.card {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  label {
+    font-weight: 600;
+    font-size: 0.9rem;
+    display: flex;
+    flex-direction: column;
+    color: #444;
+  }
+
+  input, select {
+    margin-top: 6px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    transition: border 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  input:focus, select:focus {
+    outline: none;
+    border-color: orange;
+    box-shadow: 0 0 6px rgba(255,140,0,0.4);
+  }
+
+  button.btn {
+    background: #222;
+    color: white;
+    font-size: 1rem;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+  }
+
+  button.btn:hover {
+    background: #111;
+    color: orange; /* text hover effect */
+    box-shadow: 0 0 12px rgba(255,140,0,0.6);
+  }
+
+  .shadow {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  }
+</style>
+</head>
+<body>
+<main class="container">
+  <h1><i class="fas fa-handshake"></i> Book Consultation</h1>
+  <p class="small">Pay your consultation fee. A consultant will review and approve you to proceed with plan payment.</p>
+
+  <form class="card shadow" method="post" action="../backend/api/create_consultation.php">
+    <div class="grid-2">
+      <div>
+        <label>Name
+          <input required name="name" placeholder="Jane Doe">
+        </label>
+      </div>
+      <div>
+        <label>Email
+          <input required type="email" name="email" placeholder="jane@example.com">
+        </label>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div>
+        <label>Phone
+          <input required name="phone" placeholder="+1 555 123 4567">
+        </label>
+      </div>
+      <div>
+        <label>Plan
+          <select name="plan" id="planSelect">
+            <option value="launch">Launch — $49 consultation</option>
+            <option value="scale">Scale — $79 consultation</option>
+            <option value="elevate">Elevate — $129 consultation</option>
+          </select>
+        </label>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div>
+        <label>Payment Method
+          <select name="gateway" id="gateway">
+            <option value="paystack">Paystack (test)</option>
+            <option value="flutterwave">Flutterwave (test)</option>
+            <option value="paypal">PayPal (test)</option>
+            <option value="bank">Bank Transfer</option>
+          </select>
+        </label>
+      </div>
+      <div>
+        <label>Amount (auto)
+          <input id="amount" name="amount" readonly>
+        </label>
+      </div>
+    </div>
+
+    <button class="btn" type="submit">Pay Consultation Fee</button>
+  </form>
+
+  <p class="small mt-3">* Bank transfers will be marked as “pending” until a consultant confirms receipt in the admin panel.</p>
+</main>
+
+<script>
+  const planSelect = document.getElementById('planSelect'); 
+  const amount = document.getElementById('amount'); 
+  const consult = {launch:49, scale:79, elevate:129};
+
+  function updateAmount(){ 
+    amount.value = "$" + consult[planSelect.value].toFixed(2); 
+  }
+  planSelect.addEventListener('change', updateAmount); 
+  updateAmount();
+</script>
+</body>
+</html>

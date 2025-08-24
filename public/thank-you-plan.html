@@ -1,0 +1,10 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Thank You - Plan</title><link rel="stylesheet" href="assets/css/styles.css"></head>
+<body class="container"><h1>Payment received ✅</h1><div id="info" class="small"></div>
+<p>We’ve emailed your receipt. A consultant will be in touch if anything else is needed.</p>
+<p><a class="btn" href="index.html">Back to Home</a></p>
+<script>
+const p=new URLSearchParams(location.search);
+document.getElementById('info').textContent=`Plan: ${p.get('plan')||'-'} • Ref: ${p.get('ref')||'-'}`;
+</script></body></html>

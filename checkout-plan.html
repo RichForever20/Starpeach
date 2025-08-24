@@ -1,0 +1,38 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Plan Checkout | Studiova</title><link rel="stylesheet" href="assets/css/styles.css"></head>
+<body><main class="container">
+<h1>Subscribe to Plan</h1>
+<div id="approvalAlert" class="small">Checking approval status…</div>
+<form id="planForm" class="card shadow" style="padding:16px" method="post" action="../backend/api/create_plan_payment.php">
+<div class="grid-2"><div><label>Name<input required name="name" placeholder="Jane Doe"></label></div>
+<div><label>Email<input required type="email" name="email" id="email" placeholder="jane@example.com"></label></div></div>
+<div class="grid-2"><div><label>Phone<input required name="phone" placeholder="+1 555 123 4567"></label></div>
+<div><label>Plan<select name="plan" id="planSelect">
+<option value="launch">Launch — $699</option>
+<option value="scale">Scale — $1699</option>
+<option value="elevate">Elevate — $3499</option>
+</select></label></div></div>
+<div class="grid-2"><div><label>Payment Method<select name="gateway" id="gateway">
+<option value="paystack">Paystack (test)</option>
+<option value="flutterwave">Flutterwave (test)</option>
+<option value="paypal">PayPal (test)</option>
+</select></label></div>
+<div><label>Amount (auto)<input id="amount" name="amount" readonly></label></div></div>
+<button class="btn" id="payBtn" type="submit" disabled>Pay Plan</button>
+</form>
+<p class="small">Note: You must complete consultation and get approved before paying the plan.</p>
+</main>
+<script>
+const params=new URLSearchParams(location.search); const preset=params.get('plan'); if(preset) document.getElementById('planSelect').value=preset;
+const planSelect=document.getElementById('planSelect'); const amount=document.getElementById('amount'); const price={launch:699,scale:1699,elevate:3499};
+function updateAmount(){ amount.value=price[planSelect.value].toFixed(2); } planSelect.addEventListener('change',updateAmount); updateAmount();
+const emailInput=document.getElementById('email'); const alertBox=document.getElementById('approvalAlert'); const payBtn=document.getElementById('payBtn');
+async function checkApproval(){ const email=emailInput.value.trim(); if(!email){ alertBox.textContent='Enter email to check approval'; payBtn.disabled=true; return; }
+  const plan=planSelect.value; try{ const res=await fetch(`../backend/api/check_approval.php?email=${encodeURIComponent(email)}&plan=${encodeURIComponent(plan)}`);
+    const data=await res.json(); if(data.approved){ alertBox.textContent='Consultation approved ✅ You can proceed to pay.'; payBtn.disabled=false; }
+    else{ alertBox.textContent=`Status: ${data.status}. Awaiting consultant approval…`; payBtn.disabled=true; } }
+  catch(e){ alertBox.textContent='Could not check approval. Try again.'; payBtn.disabled=true; } }
+emailInput.addEventListener('input',()=>{ clearTimeout(window._t); window._t=setTimeout(checkApproval,500); });
+planSelect.addEventListener('change',checkApproval); setInterval(checkApproval,5000);
+</script></body></html>
