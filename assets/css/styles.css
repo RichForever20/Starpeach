@@ -16486,7 +16486,7 @@ height: 270px;
 }
 @media (max-width:390px){
   .img-fluid {
-  max-width: 70%;
+  max-width: 60%;
   height: auto;
 }
 
