@@ -16484,6 +16484,13 @@ height: 270px;
     min-height: 550px;
   }
 }
+@media (max-width:390px){
+  .img-fluid {
+  max-width: 70%;
+  height: auto;
+}
+
+}
 
 .animate-spin {
   animation: spin 1s linear infinite;
