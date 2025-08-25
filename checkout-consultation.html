@@ -6,92 +6,53 @@
 <title>Consultation Checkout | Studiova</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
-  body {
-    font-family: 'Segoe UI', sans-serif;
-    background: #f8f9fb;
-    margin: 0;
-    padding: 0;
-    color: #333;
-  }
-
+  /* Mobile responsiveness */
+@media (max-width: 768px) {
   main.container {
-    max-width: 700px;
-    margin: 50px auto;
-    background: #fff;
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    margin: 20px;   /* reduce outer margin */
+    padding: 20px;  /* reduce padding */
   }
 
   h1 {
-    font-size: 1.8rem;
-    margin-bottom: 10px;
-    color: #222;
+    font-size: 1.4rem; /* smaller heading */
   }
 
   p.small {
-    font-size: 0.9rem;
-    color: #555;
-    margin-bottom: 20px;
-  }
-
-  form.card {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
+    font-size: 0.85rem;
   }
 
   .grid-2 {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-  }
-
-  label {
-    font-weight: 600;
-    font-size: 0.9rem;
-    display: flex;
-    flex-direction: column;
-    color: #444;
+    grid-template-columns: 1fr; /* stack into 1 column */
   }
 
   input, select {
-    margin-top: 6px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    font-size: 0.95rem;
-    transition: border 0.3s ease, box-shadow 0.3s ease;
-  }
-
-  input:focus, select:focus {
-    outline: none;
-    border-color: orange;
-    box-shadow: 0 0 6px rgba(255,140,0,0.4);
+    font-size: 1rem; /* make inputs easier to tap */
+    padding: 12px;
   }
 
   button.btn {
-    background: #222;
-    color: white;
     font-size: 1rem;
+    padding: 14px;
+  }
+}
+
+/* Extra small phones */
+@media (max-width: 480px) {
+  main.container {
+    margin: 10px;
+    padding: 15px;
+  }
+
+  h1 {
+    font-size: 1.2rem;
+  }
+
+  button.btn {
+    font-size: 0.95rem;
     padding: 12px;
-    border: none;
-    border-radius: 8px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    margin-top: 10px;
   }
+}
 
-  button.btn:hover {
-    background: #111;
-    color: orange; /* text hover effect */
-    box-shadow: 0 0 12px rgba(255,140,0,0.6);
-  }
-
-  .shadow {
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-  }
 </style>
 </head>
 <body>
