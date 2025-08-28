@@ -4670,8 +4670,8 @@ textarea.form-control-lg {
 }
 .cardi{
   position: relative;
-  /* top: 200px; */
-height: 270px;
+  top: px;
+height: 300px;
 }
 .bot{
   color: white;
@@ -16886,3 +16886,7 @@ button{padding:10px 15px;margin-top:10px;}
 .footer a:hover {
   color: orange !important; /* hover orange */
 }
+
+ .bg-navy { background-color: #0a1a3c; } /* Navy Blue */
+  .text-navy { color: #0a1a3c; }
+  .text-orange { color: #ff7b00; } /* Orange */
